@@ -1,0 +1,145 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ </head>
+ <body>
+  
+    <script>
+
+const Griffin = {
+   hp: 2000,      // Жизненная энергия
+   defense: 120,  // Защита
+   strenght: 150,      // Сила
+   weapon: 0 ,     // Оружие
+
+
+getStatus() {
+    return `"Griffin":${this.hp}`;
+  },
+changeHP(amount) {
+        this.hp = Math.max(0, this.hp + amount);
+  }}
+
+  const Witcher = {
+   hp: 1000,
+   defense: 100,
+   strenght: 120,
+   weapon: 250,
+getStatus() {
+    return `"Witcher":${this.hp}`;
+  },
+changeHP(amount) {
+        this.hp = Math.max(0, this.hp + amount);
+  },
+  getIgniDamage(){
+    return Math.floor(Math.random()*51)+150
+  },
+  
+}
+
+  let game = true;
+   while(game){
+    console.log(Witcher.getStatus());
+    console.log(Griffin.getStatus());
+    WitcherHit();
+    if(Griffin.hp == 0){
+      console.log("Griffon lost")
+      game = false
+    }
+    
+    GriffinHit();
+    
+
+   }
+   
+  function WitcherHit(){
+      const hit = Math.floor(Math.random() * 101) < 75;
+      const action = prompt("Choose action")
+      switch(action){
+        case "1":
+        if(hit){
+        const damage = Witcher.strenght + Witcher.weapon - Griffin.defense;
+        Griffin.changeHP(-damage);
+        console.log(
+          `Witcher hit! There are ${damage}. There are Griffon HP: ${Griffin.hp}`);
+      if(Griffin.hp<=0){ 
+        console.log("Witcher won!");
+        game = false;
+      }
+        }
+    else {
+        console.log("miss")
+    }
+    console.log("================")
+      
+      
+    
+      break;
+    case "2":
+      const igni = Witcher.getIgniDamage()
+      Griffin.changeHP(-igni)
+      console.log(
+          `Witcher use igni! There are ${igni}. There are Griffon HP: ${Griffin.hp}`);
+      console.log("================")
+      
+      break;
+
+    case "3":
+      const Lutik = ["oХватит валять дурака, пора уже тушить пожар в этой программе.","oГоворят, грифон никогда не наступит на лежащего ведьмака.", "Когда скромняга бард, отдыхал от дел, с Геральтом из Ривии, он песню эту пел..", "Трус умирает сто раз. Мужественный человек – лишь однажды.", "Людям для жизни необходимы три вещи: еда, питье и сплетни"]
+      const messageIndex = Math.floor(Math.random()*Lutik.length);
+      console.log(Lutik[messageIndex]);
+      console.log("================")
+      
+      break;
+
+
+    case "4":
+      console.log("Witcher leaved")
+      
+      game = false;
+      console.log("================")
+      
+      break;
+
+      }
+
+
+
+    }
+
+    function GriffinHit(){
+      const hit = Math.floor(Math.random() * 101) < 50;
+    
+
+    if(hit){
+      const damage = Griffin.strenght + Griffin.weapon - Witcher.defense;
+      Witcher.changeHP(-damage);
+      console.log(
+        `Griffin hit! There are ${damage}. There are Witcher HP: ${Witcher.hp}`);
+      if(Witcher.hp<=0){ 
+        console.log("Griffin won!");
+        game = false;
+      }
+    }
+      else{
+        console.log("Griffin fly")
+      }
+      console.log("================")
+      
+    }
+
+
+    
+
+    
+
+
+
+
+
+    </script>
+ </body>
+ </html>
